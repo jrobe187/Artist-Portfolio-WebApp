@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form action="/gallery/create_post" method="post">
+    <div>
+        <label for="title">Title</label>
+        <input type="text" id ="title" name= "title" required>
+    </div>
+    <div>
+        <label for="body">Body</label>
+        <input type="text" id ="body" name= "body" required>
+    </div>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

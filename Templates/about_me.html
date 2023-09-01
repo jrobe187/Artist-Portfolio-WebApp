@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content %}
+<form action="{{url_for('edit_am')}}" method="get">
+  <input type="hidden" name="redirect_url" value="{{ url_for('edit_am') }}">
+  <input type="submit" value="Redirect">
+</form>
+  <p>{{ text }}</p>
+{% endblock %}
