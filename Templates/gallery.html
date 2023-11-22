@@ -2,11 +2,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<form action="/gallery/create_post" method="POST">
-    <input type="hidden" name="redirect_url" value="{{ url_for('create_post') }}">
-    <input type="submit" value="Redirect">
-</form>
+
+
+<body>
+    
+</body>
+
 {% for post in posts %}
     {post}
-{% endfor %}
+{% endfor %} 
 {% endblock %}

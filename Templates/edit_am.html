@@ -6,6 +6,9 @@
         <label for="about_me">Body</label>
         <input type="text" id ="about_me" name="about_me" required>
     </div>
-    <input type="submit" value="Submit" name="add_element[2]">
-</form>
+    <div>
+        <input type="hidden" name="redirect_url" value="{{ url_for('about_me') }}">
+        <input type="submit" value="Submit" name="add_element[2]">
+    </div>
+</form> 
 {% endblock %}

@@ -75,9 +75,23 @@ def logout():
 
 ######GALLERY######
 @app.route('/post', methods=['GET', 'POST'])
-def post():
-
+def post(): 
     pass
+
+@app.route('/gallery/create_post', methods=['GET', 'POST'])
+def create_post():
+    if request.method == 'POST':
+        user_id = 1
+        id = 1
+        url = 'null'
+        title = request.form.get('title')
+        body = request.form.get('body')
+
+        post = post(id=id, url=url, title=title, body=body, user_id=user_id)
+        db.session.add(post)
+
+
+
 
 @app.route('/gallery', methods=['GET', 'POST'])
 def gallery():
@@ -85,10 +99,12 @@ def gallery():
   
     return render_template('gallery.html')
 
-@login_required
-@app.route('/gallery/create_post', methods=['GET', 'POST'])
-def create_post():
-    return render_template('create_post.html')
+
+
+@app.route('/gallery/view_post/<int:post_id>', methods=['GET', 'POST'])
+def view_post(post_id):
+    post =  post.query.get(post_id)
+    return render_template('view_post.html', post=post)
 
 
 ######ABOUT######
@@ -111,20 +127,26 @@ def about_me():
 @app.route('/about_me/edit_am', methods=['GET', 'POST'])
 @login_required
 def edit_am():
-        
-    
     if request.method == 'POST':
+        print('swag')
         body = request.form['about_me']
+        
         user_id = current_user.id 
         result = about.query.filter_by(user_id=user_id).first()
 
         if result:
             result.body = body
             db.session.commit()
+            print("redirecting to about_me")
+            
         else:
             new_entry = about(user_id=user_id, body=body)
             db.session.add(new_entry)
             db.session.commit()
+        return redirect(url_for('about_me'))
+             
+        
+    
     return render_template('edit_am.html')
 
     

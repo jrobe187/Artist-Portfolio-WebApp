@@ -1,0 +1,3 @@
+#####BACKEND#####
+1. Edit and Delete for posts
+2. Entire Frontend
