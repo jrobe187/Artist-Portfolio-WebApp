@@ -74,37 +74,39 @@ def logout():
     return render_template('home.html')
 
 ######GALLERY######
-@app.route('/post', methods=['GET', 'POST'])
-def post(): 
-    pass
+@app.route('/gallery', methods=['GET', 'POST'])
+def gallery():
+    if request.method == 'POST':
+        return redirect(url_for('create_post'))
+    
+    posts = post.query.all()
+  
+    return render_template('gallery.html', posts=posts)
+
+
 
 @app.route('/gallery/create_post', methods=['GET', 'POST'])
 def create_post():
     if request.method == 'POST':
-        user_id = 1
-        id = 1
+        user_id = current_user.id
+        id = None
         url = 'null'
         title = request.form.get('title')
         body = request.form.get('body')
 
-        post = post(id=id, url=url, title=title, body=body, user_id=user_id)
-        db.session.add(post)
-
-
-
-
-@app.route('/gallery', methods=['GET', 'POST'])
-def gallery():
+        new_entry = post(id=id, img_url=url, title=title, body=body, user_id=user_id)
+        db.session.add(new_entry)
+        db.session.commit()
     
-  
-    return render_template('gallery.html')
+    return render_template('create_post.html')
 
 
 
-@app.route('/gallery/view_post/<int:post_id>', methods=['GET', 'POST'])
+
+@app.route('/gallery/post/<int:post_id>', methods=['GET', 'POST'])
 def view_post(post_id):
-    post =  post.query.get(post_id)
-    return render_template('view_post.html', post=post)
+    new =  post.query.get(post_id)
+    return render_template('post.html', post=new)
 
 
 ######ABOUT######

@@ -44,6 +44,8 @@ class post(db.Model):
     img_url = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('art.users.id'), nullable=False)
 
+    user = db.relationship('users', back_populates='posts')
+
     def __init__(self, id: int, title: str, body: str, img_url: str, user_id: int) -> None:
         super().__init__()
         self.id = id

@@ -4,11 +4,17 @@
 {% block content %}
 
 
-<body>
+
+<form action="{{url_for('gallery')}}" method="post">
+    <div>
+        <input type="hidden" name="redirect_url" value="{{ url_for('create_post') }}">
+        <input type="submit" value="Create">
+    </div>
+</form>
     
-</body>
+
 
 {% for post in posts %}
-    {post}
+    <a href="/gallery/post/{{post.id}}">{{post.id}}</a>
 {% endfor %} 
 {% endblock %}
